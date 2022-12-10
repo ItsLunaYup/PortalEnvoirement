@@ -1,4 +1,9 @@
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using PortalEnvoirement.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<PortalEnvoirementContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("PortalEnvoirementContext") ?? throw new InvalidOperationException("Connection string 'PortalEnvoirementContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
